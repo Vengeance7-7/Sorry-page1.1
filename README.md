@@ -83,6 +83,18 @@ For her
             margin: 0 15px;
         }
 
+        .name-container input {
+            padding: 10px;
+            font-size: 16px;
+            width: 70%;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+
+        .name-container button {
+            margin-top: 20px;
+        }
+
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -130,39 +142,47 @@ For her
         .section.active {
             display: block;
         }
+
+        #personal-message {
+            font-size: 24px;
+            color: #ffcccb;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
-    <!-- First Section -->
+    <!-- First Section: Name Input -->
     <div class="container section active" id="section-1">
         <h1>I'm Sorry... Can We Talk?</h1>
         <p>I've been thinking about this for a while, and I need to express how much I care. My actions might've hurt you, and that wasn't my intention. Please know how deeply I regret it, and I hope we can make things better.</p>
         <button onclick="goToSection(2)">Next</button>
     </div>
 
-    <!-- Second Section -->
+    <!-- Second Section: Apology -->
     <div class="container section" id="section-2">
         <h1>Heartfelt Apology</h1>
         <p>I want to hear what’s on your heart, no matter what. I care deeply and I want to make it right.</p>
         <button onclick="goToSection(3)">Next</button>
     </div>
 
-    <!-- Third Section -->
+    <!-- Third Section: Name Entry -->
     <div class="container section" id="section-3">
-        <h1>Do You Love Me?</h1>
-        <div class="toggle-container">
-            <label>Do you love the person who sent this to you?</label>
-            <div class="toggle-buttons">
-                <input type="radio" id="yes1" name="love" value="yes">
-                <label for="yes1">Yes, I do</label>
-                <input type="radio" id="yes2" name="love" value="yes">
-                <label for="yes2">Yes, I do</label>
-            </div>
+        <h1>What's Your Name?</h1>
+        <p>Please enter your name to continue:</p>
+        <div class="name-container">
+            <input type="text" id="userName" placeholder="Enter your name">
+            <button onclick="submitName()">Submit</button>
         </div>
-        <button onclick="goToSection(4)">Next</button>
     </div>
 
-    <!-- Song Embed -->
+    <!-- Fourth Section: Displaying Creator's Message -->
+    <div class="container section" id="section-4">
+        <h1>Creator's Love</h1>
+        <p id="personal-message"></p>
+        <button onclick="goToSection(5)">Next</button>
+    </div>
+
+    <!-- Fifth Section: Song Embed -->
     <div id="song" class="section">
         <iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" frameborder="0" height="450" style="width:100%;max-width:660px;overflow:hidden;border-radius:10px;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.music.apple.com/us/album/die-with-a-smile-single/1762656724?app=music&at=10lw9d&ct=top5&itscg=30200&itsct=music_link&autoplay=true"></iframe>
     </div>
@@ -176,6 +196,18 @@ For her
             // Show the selected section
             const activeSection = document.getElementById('section-' + sectionNumber);
             activeSection.classList.add('active');
+        }
+
+        function submitName() {
+            const userName = document.getElementById("userName").value;
+
+            if (userName) {
+                const message = `The creator loves you to the multiverse, ${userName}!`;
+                document.getElementById("personal-message").textContent = message;
+                goToSection(4); // Go to the next section displaying the message
+            } else {
+                alert("Please enter your name!");
+            }
         }
     </script>
 </body>
