@@ -121,15 +121,35 @@ For her
                 transform: translateY(0);
             }
         }
+
+        /* Styles for the hidden sections */
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
+    <!-- First Section -->
+    <div class="container section active" id="section-1">
         <h1>I'm Sorry... Can We Talk?</h1>
         <p>I've been thinking about this for a while, and I need to express how much I care. My actions might've hurt you, and that wasn't my intention. Please know how deeply I regret it, and I hope we can make things better.</p>
-        
-        <button onclick="showMessage()">I’m Listening...</button>
+        <button onclick="goToSection(2)">Next</button>
+    </div>
 
+    <!-- Second Section -->
+    <div class="container section" id="section-2">
+        <h1>Heartfelt Apology</h1>
+        <p>I want to hear what’s on your heart, no matter what. I care deeply and I want to make it right.</p>
+        <button onclick="goToSection(3)">Next</button>
+    </div>
+
+    <!-- Third Section -->
+    <div class="container section" id="section-3">
+        <h1>Do You Love Me?</h1>
         <div class="toggle-container">
             <label>Do you love the person who sent this to you?</label>
             <div class="toggle-buttons">
@@ -139,17 +159,23 @@ For her
                 <label for="yes2">Yes, I do</label>
             </div>
         </div>
+        <button onclick="goToSection(4)">Next</button>
     </div>
 
-    <!-- Embed song and autoplay -->
-    <iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" frameborder="0" height="450" style="width:100%;max-width:660px;overflow:hidden;border-radius:10px;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.music.apple.com/us/album/die-with-a-smile-single/1762656724?app=music&at=10lw9d&ct=top5&itscg=30200&itsct=music_link"></iframe>
+    <!-- Song Embed -->
+    <div id="song" class="section">
+        <iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" frameborder="0" height="450" style="width:100%;max-width:660px;overflow:hidden;border-radius:10px;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.music.apple.com/us/album/die-with-a-smile-single/1762656724?app=music&at=10lw9d&ct=top5&itscg=30200&itsct=music_link&autoplay=true"></iframe>
+    </div>
 
     <script>
-        function showMessage() {
-            const p = document.querySelector('p');
-            p.innerHTML = 'I want to hear what’s on your heart, no matter what. I care deeply and I want to make it right.';
-            p.style.color = '#ffcccb';
-            p.style.fontWeight = 'bold';
+        function goToSection(sectionNumber) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => section.classList.remove('active'));
+
+            // Show the selected section
+            const activeSection = document.getElementById('section-' + sectionNumber);
+            activeSection.classList.add('active');
         }
     </script>
 </body>
